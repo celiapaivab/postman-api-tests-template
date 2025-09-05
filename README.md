@@ -7,32 +7,50 @@ Fornece uma estrutura de pastas organizada para começar, executar e compartilha
 
 ## Estrutura do projeto
 
+- `.github/workflows/` – exemplos de workflows GitHub Actions
 - `collections/` – armazena as collections do Postman com todos os scripts de pré-requisição e testes incluídos.
+- `docs/` – documentação adicional, screenshots ou notas relacionadas aos testes de API.
 - `environments/` – armazena os arquivos de ambiente do Postman (dev, staging, prod, etc.).
 - `reports/` – pasta de saída para relatórios gerados pelo Newman (HTML, JSON, etc.).
-- `docs/` – documentação adicional, screenshots ou notas relacionadas aos testes de API.
 
 ---
 
 ## Como usar
 
-1. **Clone ou use este template** para criar um novo projeto:
+## Como usar
+
+1. **Clone o repositório**
 
 ```bash
 git clone https://github.com/seuusuario/postman-api-tests-template.git
-````
+cd postman-api-tests-template
+```
 
-2. Importe sua collection e ambiente no Postman.
-
-3. Ajuste quaisquer variáveis ou configurações de ambiente conforme necessário.
-
-4. Execute os testes localmente com Newman:
+2. **Instale Newman e o reporter HTML**
 
 ```bash
-newman run collections/sua_collection.json \
-  -e environments/seu_ambiente.json \
-  -r cli,html \
-  --reporter-html-export reports/report.html
-````
+npm install -g newman newman-reporter-html
+```
 
-5. Confira os relatórios na pasta reports/.
+3. **Adicione sua collection do Postman**
+
+- Copie sua collection para a pasta `collections/`.
+- Se houver environment, coloque em `environments/` (opcional).
+
+4. **Execute os testes localmente**
+
+```bash
+mkdir -p reports
+newman run "collections/sua_collection.json" \
+  -r cli,html \
+  --reporter-html-export "reports/report.html"
+```
+
+- Os relatórios HTML serão gerados na pasta `reports/`.
+
+5. **(Opcional) Configure GitHub Actions**
+
+- Suba o workflow `.github/workflows/api-tests.yml`.
+- Ajuste o nome da collection e environment.
+- Use secrets para variáveis sensíveis, se necessário.
+
