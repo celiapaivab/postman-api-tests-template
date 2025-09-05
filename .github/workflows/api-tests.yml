@@ -1,0 +1,40 @@
+name: API Tests
+
+# When the workflow should run
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  run-api-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout repository code
+      - uses: actions/checkout@v4
+
+      # 2. Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # 3. Install Newman globally
+      - name: Install Newman
+        run: npm install -g newman newman-reporter-html
+
+      # 4. Run API tests
+      - name: Run API tests
+        run: |
+          newman run collections/sample_collection.json \ # <-- REPLACE: use your actual Postman collection filename
+          -e environments/dev_environment.json \ # <-- REPLACE: use your actual Postman environment filename
+          -r cli,html \
+          --reporter-html-export reports/report.html # <-- OPTIONAL: change the report output filename if desired
+
+      # 5. Upload the report as an artifact (optional)
+      - uses: actions/upload-artifact@v4
+        with:
+          name: api-report
+          path: reports/report.html # <-- OPTIONAL: match the report filename above

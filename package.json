@@ -1,0 +1,28 @@
+{
+  "name": "postman-api-tests-template",
+  "version": "1.0.0",
+  "description": "Template repository for API tests with Postman and Newman.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/celiapaivab/postman-api-tests-template.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/celiapaivab/postman-api-tests-template/issues"
+  },
+  "homepage": "https://github.com/celiapaivab/postman-api-tests-template#readme",
+  "devDependencies": {
+    "newman": "^4.6.1",
+    "newman-reporter-html": "^1.0.5"
+  }
+}
